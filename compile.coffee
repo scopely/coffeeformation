@@ -6,6 +6,12 @@ ConditionBuilder =
   or: (a...) -> 'Fn::Or': a
   not: (a) -> 'Fn::Not': [a]
 
+Ref = (name) -> Ref: name
+Ref.accountId = Ref 'AWS::AccountId'
+Ref.region = Ref 'AWS::Region'
+Ref.stackId = Ref 'AWS::StackId'
+Ref.stackName = Ref 'AWS::StackName'
+
 Functions =
   join: (a...) -> 'Fn::Join': ['', a]
   joinWith: (d, a...) -> 'Fn::Join': [d, a]
@@ -78,7 +84,7 @@ class StackBuilder
   evaluate: (block) ->
     block.call @, @ref, @fn
 
-  ref: (name) -> Ref: name
+  ref: Ref
   fn: Functions
 
   description: (desc) ->
