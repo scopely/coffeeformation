@@ -51,25 +51,27 @@ dumpObject = (obj, puts, depth=3) -> switch obj.constructor
 
       when key is 'Fn::Join'
         if val[0]
-          puts depth, "fn.joinWith(" + str(val[0]) + ','
+          puts depth, "fn.joinWith", str(val[0]) + ','
         else
           puts depth, "fn.join("
 
         for entry in val[1]
           dumpObject entry, puts, depth+1
-        puts depth, ')'
+        puts depth, ')' unless val[0]
 
       when key is 'Fn::FindInMap'
-        puts depth, "fn.findIn(" + str(val[0]) + ','
+        puts depth, "fn.findIn", str(val[0]) + ','
         dumpObject val[1], puts, depth+1
         dumpObject val[2], puts, depth+1
-        puts depth, ')'
+
+      when key is 'Fn::Select'
+        puts depth, "fn.select", str(val[0]) + ','
+        dumpObject val[1], puts, depth+1
 
       when key is 'Fn::If'
-        puts depth, "fn.if(" + str(val[0]) + ','
+        puts depth, "fn.if", str(val[0]) + ','
         dumpObject val[1], puts, depth+1
         dumpObject val[2], puts, depth+1
-        puts depth, ')'
 
       when key is 'Fn::Base64'
         puts depth, "fn.base64("

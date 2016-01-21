@@ -16,6 +16,7 @@ Functions =
   join: (a...) -> 'Fn::Join': ['', a]
   joinWith: (d, a...) -> 'Fn::Join': [d, a]
   findIn: (a...) -> 'Fn::FindInMap': a
+  select: (i, a) -> 'Fn::Select': [i, a]
   if: (a...) -> 'Fn::If': a
   base64: (a) -> 'Fn::Base64': a
   getAtt: (a, b) -> 'Fn::GetAtt': [a, b]
