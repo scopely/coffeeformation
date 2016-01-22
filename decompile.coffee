@@ -13,6 +13,7 @@ invert = (obj) ->
 
 ParamTypes = invert ParamTypes
 ResourceTypes = invert ResourceTypes
+ResourceTypes.Subnet = ResourceTypes['AWS::EC2::Subnet'] # apparently ok
 ReferenceBuiltins = invert ReferenceBuiltins
 
 isInlinable = (value) ->
@@ -110,6 +111,10 @@ dumpObject = (obj, puts, depth=3) -> switch obj.constructor
             puts depth+1, Name
             dumpObject Value, puts, depth+2
 
+      when not val?
+        console.error 'WARN:', 'Encountered null value in object'
+        puts depth, longKey, 'null'
+
       when val.constructor is Array
         puts depth, longKey, '['
         if val.every isInlinable
@@ -203,17 +208,24 @@ dumpResource = (key, props, puts) ->
   unless type?
     throw new Error "Unhandled resource type #{Type}"
 
-  puts 2, '@' + type, str(key) + ','
+  propCount = if Properties then Object.keys(Properties).length else 0
+  comma = ''
+  if Condition or propCount or DependsOn or UpdatePolicy
+    comma = ','
+
+  puts 2, '@' + type, str(key) + comma
   dumpObject {Condition}, puts if Condition
-  dumpObject Properties, puts
+  dumpObject Properties, puts if propCount
   dumpObject {DependsOn}, puts if DependsOn
   dumpObject {UpdatePolicy}, puts if UpdatePolicy
 
 dumpStack = (stack, puts) ->
   puts 0, 'exports.stack = (ref, fn) ->'
-  puts 1, '@description', str(stack.Description, '"')
-  puts 0
 
+  if stack.Description
+    puts 1, '@description', str(stack.Description, '"')
+
+  puts 0
   if stack.Parameters
     puts 1, '@params ->'
     for key, props of stack.Parameters

@@ -53,7 +53,11 @@ exports.ResourceTypes =
   vpc:             'AWS::EC2::VPC'
   gatewayAssoc:    'AWS::EC2::VPCGatewayAttachment'
 
+  cacheSubnetGroup: 'AWS::ElastiCache::SubnetGroup'
+
   elb: 'AWS::ElasticLoadBalancing::LoadBalancer'
+
+  rdsSubnetGroup: 'AWS::RDS::DBSubnetGroup'
 
   redshiftIngress: 'AWS::Redshift::ClusterSecurityGroupIngress'
 
