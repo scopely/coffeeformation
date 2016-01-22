@@ -38,12 +38,20 @@ exports.ResourceTypes =
 
   dynamoTable: 'AWS::DynamoDB::Table'
 
-  elasticIp:     'AWS::EC2::EIP'
-  instance:      'AWS::EC2::Instance'
-  securityGroup: 'AWS::EC2::SecurityGroup'
-  ingress:       'AWS::EC2::SecurityGroupIngress'
-  subnet:        'AWS::EC2::Subnet'
-  vpc:           'AWS::EC2::VPC'
+  elasticIp:       'AWS::EC2::EIP'
+  instance:        'AWS::EC2::Instance'
+  internetGateway: 'AWS::EC2::InternetGateway'
+  nacl:            'AWS::EC2::NetworkAcl'
+  naclEntry:       'AWS::EC2::NetworkAclEntry'
+  route:           'AWS::EC2::Route'
+  routeTable:      'AWS::EC2::RouteTable'
+  securityGroup:   'AWS::EC2::SecurityGroup'
+  ingress:         'AWS::EC2::SecurityGroupIngress'
+  subnet:          'AWS::EC2::Subnet'
+  naclAssoc:       'AWS::EC2::SubnetNetworkAclAssociation'
+  routeTableAssoc: 'AWS::EC2::SubnetRouteTableAssociation'
+  vpc:             'AWS::EC2::VPC'
+  gatewayAssoc:    'AWS::EC2::VPCGatewayAttachment'
 
   elb: 'AWS::ElasticLoadBalancing::LoadBalancer'
 

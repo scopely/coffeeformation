@@ -37,7 +37,7 @@ str = (value, delim="'") ->
 
 
 dumpObject = (obj, puts, depth=3) -> switch obj.constructor
-  when String
+  when String, Number, Boolean
     puts depth, str(obj)
 
   when Array
@@ -225,14 +225,14 @@ dumpStack = (stack, puts) ->
     for key, map of stack.Mappings
       puts 1, '@mapping', str(key) + ','
       dumpObject map, puts, 2
-    puts 0
+      puts 0
 
   # conditions can only use ref, fn.findInMap, or other conditions
   if stack.Conditions
     for key, props of stack.Conditions
       puts 1, '@condition', str(key) + ', ->'
       dumpCondition props, puts
-    puts 0
+      puts 0
 
   # resources can use like everything
   if stack.Resources
