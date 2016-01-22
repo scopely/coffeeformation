@@ -1,16 +1,15 @@
-{ParamTypes, ResourceTypes, KeyValList} = require './common'
+{
+  ParamTypes
+  ResourceTypes
+  ReferenceBuiltins
+  KeyValList
+} = require './common'
 
 ConditionBuilder =
   equals: (a, b) -> 'Fn::Equals': [a, b]
   and: (a...) -> 'Fn::And': a
   or: (a...) -> 'Fn::Or': a
   not: (a) -> 'Fn::Not': [a]
-
-Ref = (name) -> Ref: name
-Ref.accountId = Ref 'AWS::AccountId'
-Ref.region = Ref 'AWS::Region'
-Ref.stackId = Ref 'AWS::StackId'
-Ref.stackName = Ref 'AWS::StackName'
 
 Functions =
   join: (a...) -> 'Fn::Join': ['', a]
@@ -21,6 +20,10 @@ Functions =
   base64: (a) -> 'Fn::Base64': a
   getAtt: (a, b) -> 'Fn::GetAtt': [a, b]
 
+
+Ref = (name) -> Ref: name
+for alias, fullName of ReferenceBuiltins
+  Ref[alias] = Ref fullName
 
 stringify = (thing) -> switch thing.constructor
   when String then thing

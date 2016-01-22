@@ -1,4 +1,9 @@
-{ParamTypes, ResourceTypes, KeyValList} = require './common'
+{
+  ParamTypes
+  ResourceTypes
+  ReferenceBuiltins
+  KeyValList
+} = require './common'
 
 invert = (obj) ->
   out = {}
@@ -8,13 +13,17 @@ invert = (obj) ->
 
 ParamTypes = invert ParamTypes
 ResourceTypes = invert ResourceTypes
+ReferenceBuiltins = invert ReferenceBuiltins
 
 isInlinable = (value) ->
   value.Ref or value.constructor in [Number, String, Boolean]
 
 str = (value, delim="'") ->
   if value.Ref
-    "ref(" + str(value.Ref, delim) + ")"
+    if ReferenceBuiltins[value.Ref]
+      'ref.' + ReferenceBuiltins[value.Ref]
+    else
+      'ref(' + str(value.Ref, delim) + ')'
   else if value.constructor is Number or value is '0' or (''+value).match /^-?[1-9]\d*$/
     '' + Number(value)
   else if value.constructor is Boolean
@@ -47,7 +56,10 @@ dumpObject = (obj, puts, depth=3) -> switch obj.constructor
 
     switch
       when key is 'Ref'
-        puts depth, 'ref', str(val)
+        if ReferenceBuiltins[val]
+          puts depth, 'ref.' + ReferenceBuiltins[val]
+        else
+          puts depth, 'ref', str(val)
 
       when key is 'Fn::Join'
         if val[0]
@@ -90,7 +102,10 @@ dumpObject = (obj, puts, depth=3) -> switch obj.constructor
           if Value.constructor is String
             puts depth+1, Name, str(Value)
           else if Value.Ref?
-            puts depth+1, Name, 'ref', str(Value.Ref)
+            if ReferenceBuiltins[Value.Ref]
+              puts depth+1, Name, 'ref.' + ReferenceBuiltins[Value.Ref]
+            else
+              puts depth+1, Name, 'ref', str(Value.Ref)
           else
             puts depth+1, Name
             dumpObject Value, puts, depth+2
@@ -109,7 +124,10 @@ dumpObject = (obj, puts, depth=3) -> switch obj.constructor
           puts depth, ']'
 
       when val.Ref
-        puts depth, longKey, 'ref', str(val.Ref)
+        if ReferenceBuiltins[val.Ref]
+          puts depth, longKey, 'ref.' + ReferenceBuiltins[val.Ref]
+        else
+          puts depth, longKey, 'ref', str(val.Ref)
 
       when val.constructor is Object
         puts depth, longKey
