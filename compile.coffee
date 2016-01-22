@@ -116,6 +116,13 @@ class StackBuilder
     @cf.Outputs ?= {}
     @cf.Outputs[key] = props
 
+  # Helper for accountId-based maps
+  # Returns a getter that takes a single string argument
+  accountMapping: (key, props) ->
+    @mapping key, props
+    return (subKey) ->
+      Functions.findIn key, Ref.accountId, subKey
+
 compileStack = (source, file) ->
   stack = new StackBuilder
 
