@@ -25,7 +25,7 @@ Ref = (name) -> Ref: name
 for alias, fullName of ReferenceBuiltins
   Ref[alias] = Ref fullName
 
-stringify = (thing) -> switch thing.constructor
+stringify = (thing) -> switch thing?.constructor
   when String then thing
   when Number then ''+thing # CF uses strings for numbers
   when Boolean then thing
@@ -35,6 +35,9 @@ stringify = (thing) -> switch thing.constructor
     for key, val of thing
       obj[key] = stringify val
     return obj
+  when undefined
+    console.error 'WARN:', 'Encountered null value in object'
+    null
   else
     throw new Error "Cannot stringify #{thing.constructor} #{thing}"
 
