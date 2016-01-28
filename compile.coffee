@@ -19,6 +19,7 @@ Functions =
   if: (a...) -> 'Fn::If': a
   base64: (a) -> 'Fn::Base64': a
   getAtt: (a, b) -> 'Fn::GetAtt': [a, b]
+  getAZs: (a) -> 'Fn::GetAZs': a
 
 
 Ref = (name) -> Ref: name

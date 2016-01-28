@@ -94,6 +94,9 @@ dumpObject = (obj, puts, depth=3) -> switch obj.constructor
       when key is 'Fn::GetAtt'
         puts depth, "fn.getAtt", str(val[0]) + ',', str(val[1])
 
+      when key is 'Fn::GetAZs'
+        puts depth, "fn.getAZs", str(val)
+
       when key in KeyValList
         puts depth, longKey
         for {Name, Value} in val
