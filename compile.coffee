@@ -147,7 +147,8 @@ compileFile = (file) ->
   source = require path.join(process.cwd(), file)
 
   stack = compileStack source, file
-  json = JSON.stringify(stack, null, 4) + '\n'
+  spacing = process.argv[2] ? 4
+  json = JSON.stringify(stack, null, +spacing) + '\n'
   fs.writeFileSync path.basename(file, '.coffee'), json
 
   console.log "#{file}:", lines, '->', json.split("\n").length, 'lines'
