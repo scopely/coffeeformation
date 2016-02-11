@@ -52,6 +52,7 @@ exports.ResourceTypes =
   routeTableAssoc: 'AWS::EC2::SubnetRouteTableAssociation'
   vpc:             'AWS::EC2::VPC'
   gatewayAssoc:    'AWS::EC2::VPCGatewayAttachment'
+  recordSetGroup:  'AWS::Route53::RecordSetGroup'
 
   cacheSubnetGroup: 'AWS::ElastiCache::SubnetGroup'
 
