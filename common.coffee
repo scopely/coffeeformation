@@ -13,7 +13,7 @@ exports.ParamTypes =
   subnet:        'AWS::EC2::Subnet::Id'
   volume:        'AWS::EC2::Volume::Id'
   vpc:           'AWS::EC2::VPC::Id'
-  route53:       'AWS::Route53::HostedZone::Id'
+  hostedZone:    'AWS::Route53::HostedZone::Id'
 
   zoneList:          'List<AWS::EC2::AvailabilityZone::Name>'
   amiList:           'List<AWS::EC2::Image::Id>'
@@ -23,7 +23,7 @@ exports.ParamTypes =
   subnetList:        'List<AWS::EC2::Subnet::Id>'
   volumeList:        'List<AWS::EC2::Volume::Id>'
   vpcList:           'List<AWS::EC2::VPC::Id>'
-  route53List:       'List<AWS::Route53::HostedZone::Id>'
+  hostedZoneList:    'List<AWS::Route53::HostedZone::Id>'
 
 exports.ResourceTypes =
   asg:             'AWS::AutoScaling::AutoScalingGroup'
@@ -60,6 +60,9 @@ exports.ResourceTypes =
   rdsSubnetGroup: 'AWS::RDS::DBSubnetGroup'
 
   redshiftIngress: 'AWS::Redshift::ClusterSecurityGroupIngress'
+
+  recordSetGroup: 'AWS::Route53::RecordSetGroup'
+  recordSet:      'AWS::Route53::RecordSet'
 
   queue: 'AWS::SQS::Queue'
 
