@@ -132,27 +132,41 @@ compileStack = (source, file) ->
 
   try
     stack.evaluate source.stack
+    return stringify stack.cf
   catch error
     console.log "Encountered error processing stack", file
     console.log error.stack
 
-  return stringify stack.cf
-
 
 fs = require 'fs'
 path = require 'path'
+require 'coffee-script/register'
 
-compileFile = (file) ->
+# Settings
+exports.indentation = 4
+exports.extension = '.coffee'
+
+exports.processFile = (file) ->
   lines = fs.readFileSync(file, 'utf-8').split("\n").length
   source = require path.join(process.cwd(), file)
 
   stack = compileStack source, file
-  spacing = process.argv[2] ? 4
-  json = JSON.stringify(stack, null, +spacing) + '\n'
-  fs.writeFileSync path.basename(file, '.coffee'), json
+  json = JSON.stringify(stack, null, exports.indentation ? 4) + '\n'
+  fs.writeFileSync path.basename(file, exports.extension), json
 
   console.log "#{file}:", lines, '->', json.split("\n").length, 'lines'
+  return lines
 
-fs.readdirSync '.'
-  .filter (name) -> name.match /\.coffee$/
-  .forEach compileFile
+exports.processFolder = (folder='.') ->
+  files = fs.readdirSync folder
+    .filter (name) ->
+      # implements endsWith
+      name.slice(-exports.extension.length) is exports.extension
+    .map exports.processFile
+
+  if errors = files.filter((f) -> not f).length
+    console.log '❌  Had problems with', errors, 'files'
+  else
+    console.log '☕  Compiled', files.length, 'files successfully'
+
+  return errors is 0

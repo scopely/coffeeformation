@@ -1,0 +1,30 @@
+{
+  "name": "coffeeformation",
+  "version": "1.0.0",
+  "description": "Coffeescript DSL to build AWS CloudFormation templates more easily, with a roundtrip-capable decompiler for your existing JSON templates",
+  "bin": {
+    "coffeeform": "bin/coffeeform.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "coffee -o lib -c src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scopely/coffeeformation.git"
+  },
+  "keywords": [
+    "aws",
+    "cloudformation"
+  ],
+  "author": "Scopely",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/scopely/coffeeformation/issues"
+  },
+  "homepage": "https://github.com/scopely/coffeeformation#readme",
+  "dependencies": {
+    "coffee-script": "^1.10.0"
+  }
+}

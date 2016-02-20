@@ -266,11 +266,19 @@ dumpStack = (stack, puts) ->
 
 fs = require 'fs'
 
-decompileFile = (file) ->
+# Settings
+exports.extension = '.coffee'
+
+exports.processFile = (file) -> try
   input = fs.readFileSync file, 'utf-8'
   stack = JSON.parse input
 
-  output = fs.createWriteStream "#{file}.coffee"
+  unless stack?.Resources
+    console.error file, "doesn't have a Resources block."
+    console.error "Sheepishly assuming it's not CF."
+    return false
+
+  output = fs.createWriteStream "#{file}#{exports.extension}"
   lines = 1
   dumpStack stack, (depth, parts...) ->
     output.write new Array(depth+1).join('  ')
@@ -280,7 +288,18 @@ decompileFile = (file) ->
   output.end()
 
   console.log "#{file}:", input.split("\n").length, '->', lines, 'lines'
+  return lines
+catch err
+  console.log "#{file}: Encountered", err.stack
 
-fs.readdirSync '.'
-  .filter (name) -> name.match /\.(cf|json)$/
-  .forEach decompileFile
+exports.processFolder = (folder='.') ->
+  files = fs.readdirSync folder
+    .filter (name) -> name.match /\.(cf|json)$/
+    .map exports.processFile
+
+  if errors = files.filter((f) -> not f).length
+    console.log '❌  Had problems decompiling', errors, 'files'
+  else
+    console.log '☕  Decompiled', files.length, 'files successfully'
+
+  return errors is 0
