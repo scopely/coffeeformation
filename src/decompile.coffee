@@ -278,17 +278,13 @@ exports.processFile = (file) -> try
     console.error "Sheepishly assuming it's not CF."
     return false
 
-  output = fs.createWriteStream "#{file}#{exports.extension}"
-  lines = 1
+  lines = []
   dumpStack stack, (depth, parts...) ->
-    output.write new Array(depth+1).join('  ')
-    output.write parts.join(' ')
-    output.write "\n"
-    lines++
-  output.end()
+    lines.push new Array(depth+1).join('  ') + parts.join(' ')
+  fs.writeFileSync "#{file}#{exports.extension}", lines.join('\n')
 
-  console.log "#{file}:", input.split("\n").length, '->', lines, 'lines'
-  return lines
+  console.log "#{file}:", input.split("\n").length, '->', lines.length, 'lines'
+  return lines.length
 catch err
   console.log "#{file}: Encountered", err.stack
 
