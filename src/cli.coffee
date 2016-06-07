@@ -22,6 +22,8 @@ exports.run = (argv) ->
     console.error '  --extension File extension for finding Coffeeformation'
     console.error '              Also used to name files when decompiling'
     console.error '              Default: .coffee'
+    console.error '  --no-post   Disable post processing generated JSON'
+    console.error '              For example, compacting Ref objects'
     console.error '  --help      This text'
     console.error '  --version   Show metadata about your installation'
     console.error ''
@@ -58,6 +60,10 @@ exports.run = (argv) ->
       console.error 'Applies to compiled JSON only'
       process.exit 3
     impl.indentation = +arg
+
+  if '--no-post' in argv
+    argv.splice argv.indexOf('--no-post'), 1
+    impl.disablePostProcessing = true
 
   if '--extension' in argv
     [_, arg] = argv.splice argv.indexOf('--extension'), 2

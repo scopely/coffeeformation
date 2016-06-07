@@ -152,6 +152,11 @@ exports.processFile = (file) ->
 
   stack = compileStack source, file
   json = JSON.stringify(stack, null, exports.indentation ? 4) + '\n'
+
+  # Post-process JSON a little
+  unless exports.disablePostProcessing
+    json = json.replace /{\n\s+"Ref": "([^"]+)"\n\s+}/g, "{\"Ref\": \"$1\"}"
+
   fs.writeFileSync path.basename(file, exports.extension), json
 
   console.log "#{file}:", lines, '->', json.split("\n").length, 'lines'
