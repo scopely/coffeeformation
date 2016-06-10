@@ -80,17 +80,19 @@ class ResourceBuilder
     res.Properties = props
 
     # Special case to handle PropagateAtLaunch properly
-    if type is 'AWS::AutoScaling::AutoScalingGroup' and props.InstanceTags
+    if type is 'AWS::AutoScaling::AutoScalingGroup'
       # PropagateAtLaunch is required, make sure it's there first
-      props.Tags ?= []
-      for tag in props.Tags
-        tag.PropagateAtLaunch ?= "false"
+      if props.Tags?
+        for tag in props.Tags
+          tag.PropagateAtLaunch ?= "false"
 
-      # Add in tags from second list, where PropagateAtLaunch is true
-      PropagateAtLaunch = "true"
-      for Name, Value of props.InstanceTags
-        props.Tags.push {Name, Value, PropagateAtLaunch}
-      delete props.InstanceTags
+      # Add in tags from virtual list, where PropagateAtLaunch is true
+      if props.InstanceTags?
+        props.Tags ?= []
+        PropagateAtLaunch = "true"
+        for Name, Value of props.InstanceTags
+          props.Tags.push {Name, Value, PropagateAtLaunch}
+        delete props.InstanceTags
 
     for rootKey in ['DependsOn', 'UpdatePolicy']
       if props[rootKey]?
