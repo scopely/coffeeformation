@@ -76,5 +76,5 @@ exports.ReferenceBuiltins =
 
 exports.KeyValList = [
   'Dimensions'
-  # 'Tags' # TODO: PropagateAtLaunch?
+  # 'Tags' # Special-cased for ASGs, where PropagateAtLaunch is required
 ]
