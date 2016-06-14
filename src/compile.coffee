@@ -70,7 +70,9 @@ class ResourceBuilder
         res[rootKey] = props[rootKey]
         delete props[rootKey]
 
-    for keyValKey in [KeyValList..., 'Tags']
+    # These are Name, Value
+    # TODO: collapse Tags and Dimensions (and any others)
+    for keyValKey in [KeyValList...]
       # Make sure the field isn't already an array
       if props[keyValKey]? and not props[keyValKey].length?
         list = []
@@ -78,6 +80,13 @@ class ResourceBuilder
           list.push {Name, Value}
         props[keyValKey] = list
     res.Properties = props
+
+    # Tags are Key, Value
+    if props.Tags? and not props.Tags.length?
+      list = []
+      for Key, Value of props.Tags
+        list.push {Key, Value}
+      props.Tags = list
 
     # Special case to handle PropagateAtLaunch properly
     if type is 'AWS::AutoScaling::AutoScalingGroup'
@@ -90,8 +99,8 @@ class ResourceBuilder
       if props.InstanceTags?
         props.Tags ?= []
         PropagateAtLaunch = "true"
-        for Name, Value of props.InstanceTags
-          props.Tags.push {Name, Value, PropagateAtLaunch}
+        for Key, Value of props.InstanceTags
+          props.Tags.push {Key, Value, PropagateAtLaunch}
         delete props.InstanceTags
 
     for rootKey in ['DependsOn', 'UpdatePolicy']
