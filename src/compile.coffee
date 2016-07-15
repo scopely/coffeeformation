@@ -190,6 +190,9 @@ exports.processFile = (file) ->
 exports.processFolder = (folder='.') ->
   files = fs.readdirSync folder
     .filter (name) ->
+      # ignore underscore prefix
+      name[0] isnt '_'
+    .filter (name) ->
       # implements endsWith
       name.slice(-exports.extension.length) is exports.extension
     .map exports.processFile
