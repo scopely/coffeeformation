@@ -57,12 +57,21 @@ exports.ResourceTypes =
 
   elb: 'AWS::ElasticLoadBalancing::LoadBalancer'
 
+  lambdaAlias:       'AWS::Lambda::Alias'
+  lambdaEventSource: 'AWS::Lambda::EventSourceMapping'
+  lambda:            'AWS::Lambda::Function'
+  lambdaPermission:  'AWS::Lambda::Permission'
+  lambdaVersion:     'AWS::Lambda::Version'
+
   rdsSubnetGroup: 'AWS::RDS::DBSubnetGroup'
 
   redshiftIngress: 'AWS::Redshift::ClusterSecurityGroupIngress'
 
   recordSetGroup: 'AWS::Route53::RecordSetGroup'
   recordSet:      'AWS::Route53::RecordSet'
+  
+  bucket:       'AWS::S3::Bucket'
+  bucketPolicy: 'AWS::S3::BucketPolicy'
 
   queue: 'AWS::SQS::Queue'
 
