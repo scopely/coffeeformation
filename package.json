@@ -1,6 +1,6 @@
 {
   "name": "coffeeformation",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Coffeescript DSL to build AWS CloudFormation templates more easily, with a roundtrip-capable decompiler for your existing JSON templates",
   "bin": {
     "coffeeform": "bin/coffeeform.js"
