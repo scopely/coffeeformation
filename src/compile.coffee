@@ -14,6 +14,7 @@ ConditionBuilder =
 Functions =
   join: (a...) -> 'Fn::Join': ['', a]
   joinWith: (d, a...) -> 'Fn::Join': [d, a]
+  split: (d, str) -> 'Fn::Split': [d, str]
   findIn: (a...) -> 'Fn::FindInMap': a
   select: (i, a) -> 'Fn::Select': [i, a]
   if: (a...) -> 'Fn::If': a
