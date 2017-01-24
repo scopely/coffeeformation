@@ -72,6 +72,10 @@ dumpObject = (obj, puts, depth=3) -> switch obj.constructor
           dumpObject entry, puts, depth+1
         puts depth, ')' unless val[0]
 
+      when key is 'Fn::Split'
+        puts depth, "fn.split", str(val[0]) + ','
+        dumpObject val[1], puts, depth+1
+
       when key is 'Fn::FindInMap'
         puts depth, "fn.findIn", str(val[0]) + ','
         dumpObject val[1], puts, depth+1
