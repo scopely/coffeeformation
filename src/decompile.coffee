@@ -211,16 +211,17 @@ dumpResource = (key, props, puts) ->
   {Type, Condition, DependsOn, UpdatePolicy, Properties} = props
   # TODO: warn on others
 
-  type = ResourceTypes[Type]
-  unless type?
-    throw new Error "Unhandled resource type #{Type}"
-
   propCount = if Properties then Object.keys(Properties).length else 0
   comma = ''
   if Condition or propCount or DependsOn or UpdatePolicy
     comma = ','
 
-  puts 2, '@' + type, str(key) + comma
+  type = ResourceTypes[Type]
+  if type?
+    puts 2, '@' + type, str(key) + comma
+  else
+    puts 2, '@resource', str(key) + ',', str(Type) + comma
+
   dumpObject {Condition}, puts if Condition
   dumpObject Properties, puts if propCount
   dumpObject {DependsOn}, puts if DependsOn
