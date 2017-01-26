@@ -31,7 +31,7 @@ str = (value, delim="'") ->
     '' + value
   else if value.constructor is String
     if delim in value
-      value = value.replace /#{delim}/g, "\\#{delim}"
+      value = value.replace new RegExp(delim, 'g'), "\\#{delim}"
     [delim, delim].join value
   else
     throw new Error "Couldn't stringify value #{JSON.stringify value} of type #{value.constructor}"
