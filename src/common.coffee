@@ -75,6 +75,16 @@ exports.ResourceTypes =
 
   queue: 'AWS::SQS::Queue'
 
+  iamAccessKey:         'AWS::IAM::AccessKey',
+  iamGroup:             'AWS::IAM::AccessKey',
+  iamInstanceProfile:   'AWS::IAM::InstanceProfile',
+  iamManagedPolicy:     'AWS::IAM::ManagedPolicy',
+  iamPolicy:            'AWS::IAM::Policy',
+  iamRole:              'AWS::IAM::Role',
+  iamServiceLinkedRole: 'AWS::IAM::ServiceLinkedRole',
+  iamUser:              'AWS::IAM::User',
+  iamUserGroupAddition: 'AWS::IAM::UserToGroupAddition',
+
 exports.ReferenceBuiltins =
   accountId:        'AWS::AccountId'
   notificationARNs: 'AWS::NotificationARNs'
