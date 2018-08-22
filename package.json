@@ -1,13 +1,13 @@
 {
   "name": "coffeeformation",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "Coffeescript DSL to build AWS CloudFormation templates more easily, with a roundtrip-capable decompiler for your existing JSON templates",
   "bin": {
     "coffeeform": "bin/coffeeform.js"
   },
   "main": "index.js",
   "scripts": {
-    "prepare": "coffee -o lib -c src",
+    "prepublish": "node_modules/.bin/coffee -o lib -c src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
