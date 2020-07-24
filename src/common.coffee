@@ -38,6 +38,8 @@ exports.ResourceTypes =
 
   dynamoTable: 'AWS::DynamoDB::Table'
 
+  kinesisStream: 'AWS::Kinesis::Stream'
+
   elasticIp:       'AWS::EC2::EIP'
   instance:        'AWS::EC2::Instance'
   internetGateway: 'AWS::EC2::InternetGateway'

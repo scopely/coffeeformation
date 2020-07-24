@@ -16,8 +16,8 @@ npm install -g coffeeformation
 
 There are a couple subcommands:
 
-* `coffeeform compile` evaluates the Coffeeformation files (`*.coffee`) in the current directory
-  and generates matching CloudFormation JSON output files.
+* `coffeeform compile` evaluates the specified files (`*.coffee` by default) in the current directory
+  and, for those containing a valid CoffeeFormation stack, generates matching CloudFormation JSON output files.
   This is the default mode, so there's a shorthand: simply `coffeeform`.
 * `coffeeform decompile` is the opposite:
   It will take your existing CloudFormation JSON files (`*.cf`, `*.json`) in the current directory
