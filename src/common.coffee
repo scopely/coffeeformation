@@ -40,6 +40,9 @@ exports.ResourceTypes =
 
   kinesisStream: 'AWS::Kinesis::Stream'
 
+  kmsKey: 'AWS::KMS::Key'
+  kmsAlias: 'AWS::KMS::Alias'
+
   elasticIp:       'AWS::EC2::EIP'
   instance:        'AWS::EC2::Instance'
   internetGateway: 'AWS::EC2::InternetGateway'
