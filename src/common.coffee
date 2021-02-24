@@ -64,6 +64,7 @@ exports.ResourceTypes =
 
   lambdaAlias:       'AWS::Lambda::Alias'
   lambdaEventSource: 'AWS::Lambda::EventSourceMapping'
+  lambdaEventInvokeConfig: 'AWS::Lambda::EventInvokeConfig'
   lambda:            'AWS::Lambda::Function'
   lambdaPermission:  'AWS::Lambda::Permission'
   lambdaVersion:     'AWS::Lambda::Version'
