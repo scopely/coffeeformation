@@ -80,16 +80,25 @@ exports.ResourceTypes =
   bucketPolicy: 'AWS::S3::BucketPolicy'
 
   queue: 'AWS::SQS::Queue'
+  queuePolicy: 'AWS::SQS::QueuePolicy'
 
-  iamAccessKey:         'AWS::IAM::AccessKey',
-  iamGroup:             'AWS::IAM::AccessKey',
-  iamInstanceProfile:   'AWS::IAM::InstanceProfile',
-  iamManagedPolicy:     'AWS::IAM::ManagedPolicy',
-  iamPolicy:            'AWS::IAM::Policy',
-  iamRole:              'AWS::IAM::Role',
-  iamServiceLinkedRole: 'AWS::IAM::ServiceLinkedRole',
-  iamUser:              'AWS::IAM::User',
-  iamUserGroupAddition: 'AWS::IAM::UserToGroupAddition',
+  iamAccessKey:         'AWS::IAM::AccessKey'
+  iamGroup:             'AWS::IAM::AccessKey'
+  iamInstanceProfile:   'AWS::IAM::InstanceProfile'
+  iamManagedPolicy:     'AWS::IAM::ManagedPolicy'
+  iamPolicy:            'AWS::IAM::Policy'
+  iamRole:              'AWS::IAM::Role'
+  iamServiceLinkedRole: 'AWS::IAM::ServiceLinkedRole'
+  iamUser:              'AWS::IAM::User'
+  iamUserGroupAddition: 'AWS::IAM::UserToGroupAddition'
+
+  apiGatewayRestApi:    'AWS::ApiGateway::RestApi'
+  apiGatewayAccount:    'AWS::ApiGateway::Account'
+  apiGatewayStage:      'AWS::ApiGateway::Stage'
+  apiGatewayDeployment: 'AWS::ApiGateway::Deployment'
+  apiGatewayResource:   'AWS::ApiGateway::Resource'
+  apiGatewayMethod:     'AWS::ApiGateway::Method'
+  apiGatewayAuthorizer: 'AWS::ApiGateway::Authorizer'
 
 exports.ReferenceBuiltins =
   accountId:        'AWS::AccountId'
