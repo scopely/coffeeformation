@@ -92,12 +92,12 @@ exports.ResourceTypes =
   iamUser:              'AWS::IAM::User'
   iamUserGroupAddition: 'AWS::IAM::UserToGroupAddition'
 
-  apiGatewayRestApi: 'AWS::ApiGateway::RestApi'
-  apiGatewayAccount: 'AWS::ApiGateway::Account'
-  apiGatewayStage: 'AWS::ApiGateway::Stage'
+  apiGatewayRestApi:    'AWS::ApiGateway::RestApi'
+  apiGatewayAccount:    'AWS::ApiGateway::Account'
+  apiGatewayStage:      'AWS::ApiGateway::Stage'
   apiGatewayDeployment: 'AWS::ApiGateway::Deployment'
-  apiGatewayResource: 'AWS::ApiGateway::Resource'
-  apiGatewayMethod: 'AWS::ApiGateway::Method'
+  apiGatewayResource:   'AWS::ApiGateway::Resource'
+  apiGatewayMethod:     'AWS::ApiGateway::Method'
   apiGatewayAuthorizer: 'AWS::ApiGateway::Authorizer'
 
 exports.ReferenceBuiltins =
