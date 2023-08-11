@@ -208,12 +208,12 @@ dumpCondition = (props, puts, depth=2) ->
   puts depth, ')'
 
 dumpResource = (key, props, puts) ->
-  {Type, Condition, DependsOn, UpdatePolicy, Properties} = props
+  {Type, Condition, DependsOn, UpdatePolicy, DeletionPolicy, Properties} = props
   # TODO: warn on others
 
   propCount = if Properties then Object.keys(Properties).length else 0
   comma = ''
-  if Condition or propCount or DependsOn or UpdatePolicy
+  if Condition or propCount or DependsOn or UpdatePolicy or DeletionPolicy
     comma = ','
 
   type = ResourceTypes[Type]
@@ -226,6 +226,7 @@ dumpResource = (key, props, puts) ->
   dumpObject Properties, puts if propCount
   dumpObject {DependsOn}, puts if DependsOn
   dumpObject {UpdatePolicy}, puts if UpdatePolicy
+  dumpObject {DeletionPolicy}, puts if DeletionPolicy
 
 dumpStack = (stack, puts) ->
   puts 0, 'exports.stack = (ref, fn) ->'

@@ -104,7 +104,7 @@ class ResourceBuilder
           props.Tags.push {Key, Value, PropagateAtLaunch}
         delete props.InstanceTags
 
-    for rootKey in ['DependsOn', 'UpdatePolicy']
+    for rootKey in ['DependsOn', 'UpdatePolicy', 'DeletionPolicy']
       if props[rootKey]?
         res[rootKey] = props[rootKey]
         delete props[rootKey]
